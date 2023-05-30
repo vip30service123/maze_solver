@@ -3,7 +3,7 @@ Build maze representation and maze solver for study purpose only. This is a self
 
 
 # Main Problems
-Need user interface <br/>
+Need user interface (pygame incoming) <br/>
 Fix class Maze container and how to interace with it <br/>
 Write READ.me <br/>
 Write tests <br/>
