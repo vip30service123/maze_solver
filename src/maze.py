@@ -22,7 +22,7 @@ class MazeContainer:
             self.wide = len(self.maze[0])
     
     def __contains__(self, coor: Tuple[int, int]) -> bool:
-        if coor[0] < self.height and coor[0] > 0 and coor[1] < self.wide and coor[1] > 0:
+        if coor[0] < self.height and coor[0] >= 0 and coor[1] < self.wide and coor[1] >= 0:
             return True
         return False
 
@@ -39,12 +39,26 @@ class Maze:
         Check if maze contains starting point and ending point 
         '''
         check = [0, 0]
-        for row in self.maze:
+        for row in self.maze.get():
             if 'o' in row:
                 check[0] += 1
             if '0' in row:
                 check[1] += 1
         return check == [1, 1]
+
+    def get_starting_point(self) -> Tuple[int, int]:           
+        for rowth in range(len(self.maze.get())):
+            for colth in range(len(self.maze.get()[rowth])):
+                if self.maze.get()[rowth][colth] == 'o':
+                    return (rowth, colth)
+        raise Exception("Missing starting point")
+
+    def get_ending_point(self) -> Tuple[int, int]:           
+        for rowth in range(len(self.maze.get())):
+            for colth in range(len(self.maze.get()[rowth])):
+                if self.maze.get()[rowth][colth] == '0':
+                    return (rowth, colth)
+        raise Exception("Missing ending point")
 
     def add_wall(self, coor: Tuple[int, int]) -> None:
         if coor in self.maze:
@@ -58,16 +72,21 @@ class Maze:
         if coor in self.maze:
             self.maze[coor[0]][coor[1]] = '0'
 
-    def change_wall_to_path(self, coor: Tuple[int, int]) -> None:
+    def change_specific_position(self, coor: Tuple[int, int], position_type: str) -> None:
         if coor in self.maze:
-            self.maze[coor[0]][coor[1]] = '.'
+            self.maze.get()[coor[0]][coor[1]] = position_type
+
+    def to_list(self) -> List:
+        return self.maze.get()
 
     def visualize(self) -> None:
         for row in self.maze.get():
             print(' '.join(row))
 
 
-def generate_random_maze(height: int = 10, wide: int = 10, num_wall: int = 20):
+def generate_random_maze(
+        height: int = 10, wide: int = 10, num_wall: int = 20
+    ) -> Maze:
     if height < 1 or wide < 1:
         raise Exception('Height or Wide is not available')
     maze_list = [['.' for _ in range(wide)] for _ in range(height)]
