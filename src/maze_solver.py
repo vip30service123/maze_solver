@@ -18,7 +18,9 @@ class MazeSolver:
         ending_vertex = self.maze.get_ending_point()
         return [starting_vertex] + vertices + [ending_vertex]
 
-    def retrieve_nearby_vertices(self, check_vertex: Tuple[int, int], available_vertices: List[Tuple[int, int]] = None) -> List[Tuple[int, int]]:
+    def retrieve_nearby_vertices(
+            self, check_vertex: Tuple[int, int], available_vertices: List[Tuple[int, int]] = None
+        ) -> List[Tuple[int, int]]:
         all_possible_nearby_vertices = list(set([
             (check_vertex[0], min(check_vertex[1] + 1, len(self.maze.to_list()[0]) - 1)),
             (check_vertex[0], max(check_vertex[1] - 1, 0)),
@@ -42,6 +44,7 @@ class MazeSolver:
         queue = [self.all_vertices.copy()[0]]
         unvisited_vertices = self.all_vertices.copy()[1:]
         available_nearby_vertices = {}
+
         while queue:
             all_vertices_this_level = []
             for vertex in queue:
@@ -53,6 +56,7 @@ class MazeSolver:
                 if vertex in unvisited_vertices:
                     unvisited_vertices.remove(vertex)
             queue = all_vertices_this_level
+        
         shortest_path = []
         current_vertex = self.all_vertices[-1]
         while current_vertex != self.all_vertices[0]:
