@@ -10,3 +10,4 @@ Write tests <br/>
 Write docs <br/>
 Change variables name (in proper name) <br/>
 Clean code <br/>
+Write requirements.txt <br/>
