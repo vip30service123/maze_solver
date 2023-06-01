@@ -55,6 +55,7 @@ class MazeInterface:
     def run(self):
         clock = pygame.time.Clock()
         screen = pygame.display.set_mode((800, 500))
+        pygame.display.set_caption('Maze Solver')
         screen.fill("White")
 
         while True:
