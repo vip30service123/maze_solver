@@ -9,8 +9,11 @@ It's basically images on images lol. Add like 200 x n space for button and check
 
 
 # Main Problems
-Need user interface (pygame incoming) <br/>
+Fix not corresponding <br/>
+
 Fix class Maze container and how to interace with it <br/>
+
+
 Write READ.me <br/>
 Write tests <br/>
 Write docs <br/>
