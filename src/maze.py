@@ -6,13 +6,11 @@ class MazeContainer:
     '''
     Just to use __contains__ function lol
     '''
-    def __init__(self, height: int = 0, wide: int = 0, maze: List[List] = None) -> None:
+    def __init__(self, height: int = 10, wide: int = 10, maze: List[List] = None) -> None:
         if (height != 0 or wide != 0) and maze != None:
             raise Exception("Maze is already created")
 
         if not maze:
-            if height == 0 or wide == 0:
-                raise Exception("Height or Wide is missing")
             self.maze = [['.' for _ in range(wide)] for _ in range(height)]
             self.height = height
             self.wide = wide
@@ -64,13 +62,27 @@ class Maze:
         if coor in self.maze:
             self.maze[coor[0]][coor[1]] = 'x'
 
+    def is_starting_point_available(self) -> bool:
+        for rowth in range(len(self.maze.get())):
+            for colth in range(len(self.maze.get()[0])):
+                if self.maze.get()[rowth][colth] == 'o':
+                    return True
+        return False
+
+    def is_ending_point_available(self) -> bool:
+        for rowth in range(len(self.maze.get())):
+            for colth in range(len(self.maze.get()[0])):
+                if self.maze.get()[rowth][colth] == '0':
+                    return True
+        return False
+
     def add_start_point(self, coor: Tuple[int, int]) -> None:
-        if coor in self.maze:
-            self.maze[coor[0]][coor[1]] = 'o'
+        if coor in self.maze and not self.is_starting_point_available():
+            self.maze.get()[coor[0]][coor[1]] = 'o'
 
     def add_end_point(self, coor: Tuple[int, int]) -> None:
-        if coor in self.maze:
-            self.maze[coor[0]][coor[1]] = '0'
+        if coor in self.maze and not self.is_ending_point_available():
+            self.maze.get()[coor[0]][coor[1]] = '0'
 
     def change_specific_position(self, coor: Tuple[int, int], position_type: str) -> None:
         if coor in self.maze:

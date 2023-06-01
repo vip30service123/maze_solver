@@ -8,6 +8,9 @@ class MazeSolver:
             self.maze = maze
         self.all_vertices = self.retrieve_all_vertices()
 
+    def insert_maze(self, maze: Maze) -> None:
+        self.maze = maze
+
     def retrieve_all_vertices(self) -> List[Tuple[int, int]]:
         vertices = []
         for rowth in range(len(self.maze.to_list())):
@@ -41,6 +44,9 @@ class MazeSolver:
             ] 
 
     def get_shortest_path(self) -> List[Tuple[int, int]]:
+        if not self.maze._is_valid_maze():
+            return []
+
         queue = [self.all_vertices.copy()[0]]
         unvisited_vertices = self.all_vertices.copy()[1:]
         available_nearby_vertices = {}
@@ -59,10 +65,13 @@ class MazeSolver:
         
         shortest_path = []
         current_vertex = self.all_vertices[-1]
-        while current_vertex != self.all_vertices[0]:
-            for vertex, nearby_vertices in available_nearby_vertices.items():
-                if current_vertex in nearby_vertices:
-                    current_vertex = vertex
-                    shortest_path.append(vertex)
-                    break
-        return shortest_path[:len(shortest_path) - 1]
+        try:
+            while current_vertex != self.all_vertices[0]:
+                for vertex, nearby_vertices in available_nearby_vertices.items():
+                    if current_vertex in nearby_vertices:
+                        current_vertex = vertex
+                        shortest_path.append(vertex)
+                        break
+            return shortest_path[:len(shortest_path) - 1]
+        except:
+            return []

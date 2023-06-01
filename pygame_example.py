@@ -6,7 +6,7 @@ def choose_suitable_position(coor):
 
 
 pygame.init()
-screen = pygame.display.set_mode((500, 500))
+screen = pygame.display.set_mode((1000, 500))
 pygame.display.set_caption('Runner')
 clock = pygame.time.Clock()
 
@@ -20,6 +20,8 @@ red_surface.fill('Red')
 blue_surface = pygame.Surface((50, 50))
 blue_surface.fill('Blue')
 
+text_font = pygame.font.Font(None, 50)
+wall_text = text_font.render("Create wall", False, "White")
 
 while True:
     for event in pygame.event.get():
@@ -40,9 +42,7 @@ while True:
                 new_pos = choose_suitable_position(pos)
                 screen.blit(red_surface, new_pos)
 
-
-    # screen.blit(test_surface, (0, 0))
-    # screen.blit(text_surface, (position, 100))
+    screen.blit(wall_text, (0, 0))
 
     pygame.display.update()
     clock.tick(60) # Frame = 60
