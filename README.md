@@ -1,17 +1,18 @@
-# maze_solver
-Build maze representation and maze solver for study purpose only. This is a self project
+# Maze Solver
 
 
 
-# Idea for UI
-It's basically images on images lol. Add like 200 x n space for button and check the coordinate
 
 
+## Setup 
+Do the following instructions:
+1. Open command prompt, type 'git clone https://github.com/vip30service123/maze_solver.git' to clone the project
+2. Type 'python install -r requirements.txt' to install related libraries
+3. Type 'python main.py' to run the project
 
-# Main Problems
-Fix not corresponding <br/>
+## 
 
-Fix class Maze container and how to interace with it <br/>
+
 
 
 Write READ.me <br/>

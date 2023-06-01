@@ -3,31 +3,22 @@ from typing import List, Tuple
 
 
 class MazeSolver:
-    def __init__(self, maze: Maze = None) -> None:
+    def __init__(self, maze: Maze) -> None:
         if maze:
             self.maze = maze
-        self.all_vertices = self.retrieve_all_vertices()
-
-    def insert_maze(self, maze: Maze) -> None:
-        self.maze = maze
-
-    def retrieve_all_vertices(self) -> List[Tuple[int, int]]:
-        vertices = []
-        for rowth in range(len(self.maze.to_list())):
-            for colth in range(len(self.maze.to_list()[0])):
-                if self.maze.to_list()[rowth][colth] == '.':
-                    vertices.append((rowth, colth))
-        starting_vertex = self.maze.get_starting_point()
-        ending_vertex = self.maze.get_ending_point()
-        return [starting_vertex] + vertices + [ending_vertex]
+        else:
+            raise Exception("Missing maze.")
+        self.all_vertices = self.maze.get_all_coor_from_type('o') + \
+                            self.maze.get_all_coor_from_type('.') + \
+                            self.maze.get_all_coor_from_type('0') 
 
     def retrieve_nearby_vertices(
             self, check_vertex: Tuple[int, int], available_vertices: List[Tuple[int, int]] = None
         ) -> List[Tuple[int, int]]:
         all_possible_nearby_vertices = list(set([
-            (check_vertex[0], min(check_vertex[1] + 1, len(self.maze.to_list()[0]) - 1)),
+            (check_vertex[0], min(check_vertex[1] + 1, self.maze.get_width() - 1)),
             (check_vertex[0], max(check_vertex[1] - 1, 0)),
-            (min(check_vertex[0] + 1, len(self.maze.to_list())), check_vertex[1]),
+            (min(check_vertex[0] + 1,self.maze.get_height()), check_vertex[1]),
             (max(check_vertex[0] - 1, 0), check_vertex[1])
         ]))
         if available_vertices:
@@ -44,7 +35,7 @@ class MazeSolver:
             ] 
 
     def get_shortest_path(self) -> List[Tuple[int, int]]:
-        if not self.maze._is_valid_maze():
+        if not self.maze.is_valid_maze():
             return []
 
         queue = [self.all_vertices.copy()[0]]
@@ -72,6 +63,9 @@ class MazeSolver:
                         current_vertex = vertex
                         shortest_path.append(vertex)
                         break
+                # If there is no path, the while loop will run forever so it should be stoped
+                if current_vertex == self.all_vertices[-1]:
+                    break
             return shortest_path[:len(shortest_path) - 1]
         except:
             return []
