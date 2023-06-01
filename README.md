@@ -14,20 +14,20 @@ Do the following instructions:
 ### Example
 
 When the app starts, it looks like this
-<img src="imgs\Create_maze.png">
-
+<img src="imgs\Initial.png">
 
 Create a maze
-![image](imgs\Create_maze.png)
+<img src="imgs\Create_maze.png">
 
 When clicking 'Find the shortest path' button, it will demonstate by a blue line
-![image](imgs\Finding_optimal_path.png)
+<img src="imgs\Finding_optimal_path.png">
 
 When the maze is unsolvable, it will not draw a blue line
-![image](imgs\Unsolvable_maze.png)
+<img src="imgs\Unsolvable_maze.png">
 
 When clicking 'Clear' button, it will return to initial state
-![alt text](imgs\Initial.png)
+<img src="imgs\Initial.png">
+
 ### Button type
 **Create wall**: Click to a specific block to draw a black block. Click again to erase it. <br/>
 **Create starting point**: Click to a specific block to draw a yellow block. It can only be erased by clicking it again. The starting point can only represent once a maze. <br/>
