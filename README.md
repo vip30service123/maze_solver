@@ -14,10 +14,7 @@ Do the following instructions:
 ### Example
 
 When the app starts, it looks like this
-![image](maze_solver\imgs\Initial.png)
-<img src="maze_solver\imgs\Create_maze.png">
 <img src="imgs\Create_maze.png">
-<img src="C:\Users\Acer\Desktop\python_apps\maze_solver\imgs\Finding_optimal_path.png">
 
 
 Create a maze
