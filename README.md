@@ -35,13 +35,12 @@ When clicking 'Clear' button, it will return to initial state
 **Finding the shortest path**: Draw a blue line (opimal path) from starting point to ending point. It will not draw anything if the maze is unsolvable. <br/>
 **Clear**: Return to the initial state <br/>
 
-
+## Run tests
+Run 'python -m unittest discover -s tests'
 
 ## Main problems
-Add constants <br/>
-Write READ.me <br/>
 Write tests <br/>
 Write docs <br/>
-Change variables name (in proper name) <br/>
+PEP 8 <br/>
 Clean code <br/>
-Write requirements.txt <br/>
+Write setup.py <br/>
