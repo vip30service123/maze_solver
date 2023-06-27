@@ -7,18 +7,23 @@ from src import constants, maze, maze_solver
 
 
 def _choose_suitable_position(coor) -> Tuple[int, int]:
+    """Return suitable coordinate for placing block."""
     return (int(coor[0]/constants.BLOCK_SIZE)*constants.BLOCK_SIZE, 
             int(coor[1]/constants.BLOCK_SIZE)*constants.BLOCK_SIZE)
 
 def _to_matrix_position(coor) -> Tuple[int, int]:
+    """Convert screen position to matrix coordinate"""
     return (int(coor[0]/constants.BLOCK_SIZE), 
             int(coor[1]/constants.BLOCK_SIZE))
 
 def _matrix_pos_to_screen_pos(coor) -> Tuple[int, int]:
+    """Convert matrix coordinate to app screen coordinate."""
     return (coor[0]*constants.BLOCK_SIZE, coor[1]*constants.BLOCK_SIZE)
 
 
 class MazeInterface:
+    """
+    """
     def __init__(self) -> None:
         pygame.init()
 
@@ -30,25 +35,20 @@ class MazeInterface:
         self.white_surface = pygame.Surface((constants.BLOCK_SIZE, 
                                              constants.BLOCK_SIZE))
         self.white_surface.fill('White')
-
         self.black_surface = pygame.Surface((constants.BLOCK_SIZE, 
                                              constants.BLOCK_SIZE))
         self.black_surface.fill('Black')
-
         self.blue_surface = pygame.Surface((constants.BLOCK_SIZE, 
                                             constants.BLOCK_SIZE))
         self.blue_surface.fill('Blue')
-
         self.yellow_surface = pygame.Surface((constants.BLOCK_SIZE, 
                                               constants.BLOCK_SIZE))
         self.yellow_surface.fill('Yellow')
-
         self.green_surface = pygame.Surface((constants.BLOCK_SIZE, 
                                              constants.BLOCK_SIZE))
         self.green_surface.fill('Green')
 
         self.text_font = pygame.font.Font(None, constants.TEXT_FONT_SIZE)
-
         self.wall_text = self.text_font.render("Create wall", False, "Red")
         self.start_text = self.text_font.render("Create starting point", 
                                                 False, 
@@ -65,6 +65,7 @@ class MazeInterface:
         self.mouse_status = ''
 
     def run(self) -> None:
+        """Run maze app using pygame."""
         clock = pygame.time.Clock()
         screen = pygame.display.set_mode(constants.SCREEN_SIZE)
         pygame.display.set_caption('Maze Solver')

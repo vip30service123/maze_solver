@@ -4,6 +4,8 @@ from src.maze import Maze
 
 
 class MazeSolver:
+    """
+    """
     def __init__(self, maze: Maze) -> None:
         if maze:
             self._maze = maze
@@ -17,6 +19,7 @@ class MazeSolver:
             self, check_vertex: Tuple[int, int], 
             available_vertices: List[Tuple[int, int]] = None
         ) -> List[Tuple[int, int]]:
+        """Return all available nearby point at input vertex."""
         all_possible_nearby_vertices = list(set([
             (check_vertex[0], min(check_vertex[1]+1, 
                 self._maze.get_width()-1)
@@ -43,6 +46,7 @@ class MazeSolver:
             ] 
 
     def get_shortest_path(self) -> List[Tuple[int, int]]:
+        """Return a list of points in order."""
         if not self._maze.is_valid_maze():
             return []
 

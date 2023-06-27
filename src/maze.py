@@ -7,7 +7,7 @@ class Maze:
             self, height: int = 0, width: int = 0, maze: List[List] = None
         ) -> None:
         if (height != 0 or width != 0) and maze != None:
-            raise Exception("Maze is already created")
+            raise Exception("Maze is already created.")
 
         if not maze:
             self.maze = [['.' for _ in range(width)] for _ in range(height)]
@@ -27,9 +27,7 @@ class Maze:
         return False
 
     def is_valid_maze(self) -> bool:
-        '''
-        Check if maze contains starting point and ending point 
-        '''
+        """Check if maze contains starting point and ending point."""
         check = [0, 0]
         for row in self.maze:
             if 'o' in row:
@@ -39,6 +37,7 @@ class Maze:
         return check == [1, 1]
 
     def is_starting_point_available(self) -> bool:
+        """Check if starting point is already in maze."""
         for rowth in range(self.height):
             for colth in range(len(self.maze[0])):
                 if self.maze[rowth][colth] == 'o':
@@ -46,6 +45,7 @@ class Maze:
         return False
 
     def is_ending_point_available(self) -> bool:
+        """Return True if ending point is already in maze, False otherwise."""
         for rowth in range(self.height):
             for colth in range(len(self.maze[0])):
                 if self.maze[rowth][colth] == '0':
@@ -53,53 +53,62 @@ class Maze:
         return False
 
     def to_list(self) -> List:
+        """Return maze's point list."""
         return self.maze
 
     def get_height(self) -> int:
+        """Return maze's height."""
         return self.height
 
     def get_width(self) -> int:
+        """Return maze's width."""
         return self.width
 
-    def get_all_coor_from_type(self, type: str) -> List[Tuple[int, int]]:
+    def get_all_coor_from_type(self, type_: str) -> List[Tuple[int, int]]:
+        """Return all the points that have the same type as input type."""
         coor_list = []
         for rowth in range(self.height):
             for colth in range(self.width):
-                if self.maze[rowth][colth] == type:
+                if self.maze[rowth][colth] == type_:
                     coor_list.append((rowth, colth))
         return coor_list
 
     def get_type(self, coor: Tuple[int, int]) -> str:
+        """Return point type at input coordinate."""
         return self.maze[coor[0]][coor[1]]
 
-    def get_starting_point_coor(self) -> Tuple[int, int]:           
+    def get_starting_point_coor(self) -> Tuple[int, int]:     
+        """Return starting point coordinate."""      
         for rowth in range(self.height):
             for colth in range(len(self.maze[rowth])):
                 if self.maze[rowth][colth] == 'o':
                     return (rowth, colth)
-        raise Exception("Missing starting point")
+        raise Exception("Missing starting point.")
 
-    def get_ending_point_coor(self) -> Tuple[int, int]:           
+    def get_ending_point_coor(self) -> Tuple[int, int]:        
+        """Return ending point coordinate.""" 
         for rowth in range(self.height):
             for colth in range(len(self.maze[rowth])):
                 if self.maze[rowth][colth] == '0':
                     return (rowth, colth)
-        raise Exception("Missing ending point")
+        raise Exception("Missing ending point.")
 
-    def update_type(self, coor: Tuple[int, int], position_type: str) -> None:
+    def update_type(self, coor: Tuple[int, int], type_: str) -> None:
+        """Change type at input coordinate."""
         if coor in self:
-            if position_type == '.' or position_type == 'x':
-                self.maze[coor[0]][coor[1]] = position_type
-            elif position_type == 'o':
+            if type_ == '.' or type_ == 'x':
+                self.maze[coor[0]][coor[1]] = type_
+            elif type_ == 'o':
                 if not self.is_starting_point_available():
-                    self.maze[coor[0]][coor[1]] = position_type
-            elif position_type == '0':
+                    self.maze[coor[0]][coor[1]] = type_
+            elif type_ == '0':
                 if not self.is_ending_point_available():
-                    self.maze[coor[0]][coor[1]] = position_type
+                    self.maze[coor[0]][coor[1]] = type_
             else:
-                raise Exception("Undefined point type.")
+                raise Exception("Undefined point type_.")
 
     def visualize(self) -> None:
+        """Visualize the maze by using 'print'."""
         for row in self.maze:
             print(' '.join(row))
 
@@ -107,6 +116,7 @@ class Maze:
 def generate_random_maze(
         height: int = 10, width: int = 10, num_wall: int = 20
     ) -> Maze:
+    """Return a maze that has random walls, starting point and ending point."""
     if height < 1 or width < 1:
         raise Exception('Height or Width is not available')
     maze_list = [['.' for _ in range(width)] for _ in range(height)]
